@@ -10,7 +10,7 @@ export default function ChessGame() {
   const game = useChessGame();
   return (
     <main className="app-shell">
-      <header className="topbar"><a className="brand" href="/"><span className="brand-mark">♞</span><span>3D Chess<span className="brand-dot">.</span></span></a><div className="topbar-right"><span className="live-dot" /> LOCAL GAME <span className="version-pill">v1.1.0</span></div></header>
+      <header className="topbar"><a className="brand" href="/"><span className="brand-mark">♞</span><span>3D Chess<span className="brand-dot">.</span></span></a><div className="topbar-right"><a className="multiplayer-nav" href="/multiplayer">ONLINE PLAY ↗</a><span className="live-dot" /> LOCAL GAME <span className="version-pill">v1.1.0</span></div></header>
       <section className="intro"><div className="eyebrow"><span /> A CLASSIC, REIMAGINED</div><h1>Think ahead.<br /><em>See in 3D.</em></h1><p>A tactile chess experience, rendered in three dimensions. Make your move, read the board, and let strategy take shape.</p></section>
       <section className="workspace">
         <ChessBoard position={game.position} selected={game.selected} targets={game.targets} orientation={game.orientation} onSquareClick={game.selectSquare} status={game.status} />
