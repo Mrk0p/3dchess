@@ -1,9 +1,9 @@
 # 3D Chess
 
-An interactive browser-based chess game built with React, Vite, Three.js, and chess.js. Play legal moves on a 3D board, orbit and zoom the view, undo moves, reset the game, flip the board, and copy the current FEN.
+A browser-based chess game built with **Next.js App Router**, React, Three.js, and chess.js. The project is organized into small, feature-focused modules.
 
 ## Requirements
-- Node.js 20.19+ or 22.12+
+- Node.js 20.9 or newer
 - npm
 - A modern browser with WebGL support
 
@@ -16,22 +16,28 @@ npm run dev
 ## Production build
 ```bash
 npm run build
-npm run preview
+npm start
 ```
 
-Vercel settings are included in `vercel.json`: build command `npm run build`, output directory `dist`.
+## Features
+- 3D chessboard with orbit and zoom controls
+- Legal moves and highlighted destinations
+- Move history and game status
+- Undo and new-game controls
+- Flip board orientation
+- Copy current FEN position
+- Pawn promotion defaults to queen
 
-## Controls
-- Select a piece and then a highlighted destination.
-- Drag to orbit the board and scroll to zoom.
-- Undo the previous move or start a new game.
-- Flip board orientation.
-- Copy the current FEN position.
-- Pawn promotion defaults to queen.
+## Feature-oriented structure
+- `app/`: Next.js routes, metadata, and global styles
+- `components/chess-board/`: 3D board UI and Three.js scene lifecycle
+- `features/game/useChessGame.js`: game state and chess actions
+- `features/game/GameControls.jsx`: reset, undo, and orientation controls
+- `features/game/MoveHistory.jsx`: notation history
+- `features/game/FenPanel.jsx`: FEN display and clipboard action
+- `features/game/chess-utils.js`: status and notation helpers
 
-## Development records
-- `src/PROTOCOL.md`: development protocol and versioning requirements.
-- `src/ACTIVITY.md`: append-only activity and test log.
+## Deployment
+Import `Mrk0p/3dchess` into Vercel. Framework preset: **Next.js**. Build command and output directory can remain at their defaults.
 
-## Validation
-The source has been reviewed, but a production build and browser interaction tests must be run in an environment where npm dependencies can be installed.
+A successful production build and live deployment must be verified in a network-enabled environment.
