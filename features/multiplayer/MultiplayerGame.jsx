@@ -109,21 +109,37 @@ export default function MultiplayerGame() {
 
   useEffect(() => {
     if (!roomId || !room) return;
+    let active = true;
+    const refresh = async () => {
+      try {
+        const response = await fetch(`/api/multiplayer/rooms/${encodeURIComponent(roomId)}`, { cache: "no-store" });
+        const data = await response.json();
+        if (active && response.ok && data.room?.roomId === roomId) {
+          setRoom((current) => current?.updatedAt === data.room.updatedAt ? current : data.room);
+        }
+      } catch { /* Keep the last known board while the network reconnects. */ }
+    };
     const client = getSupabaseBrowser();
-    if (!client) {
-      setError("Realtime is not configured yet. Add the Supabase URL and anon key, then refresh.");
-      return;
+    let channel;
+    if (client) {
+      channel = client.channel(`chess-room:${roomId}`)
+        .on("broadcast", { event: "room_state" }, ({ payload }) => {
+          if (!active || payload?.roomId !== roomId) return;
+          setRoom(payload);
+          setSelected(null);
+          setTargets([]);
+          setMessage(payload.status === "finished" ? (payload.result || "Game finished") : "Board synchronized with your opponent.");
+        })
+        .subscribe();
+    } else {
+      setError("Supabase Realtime is not configured. Room state will refresh periodically; add the browser key for live updates.");
     }
-    const channel = client.channel(`chess-room:${roomId}`)
-      .on("broadcast", { event: "room_state" }, ({ payload }) => {
-        if (payload?.roomId !== roomId) return;
-        setRoom(payload);
-        setSelected(null);
-        setTargets([]);
-        setMessage(payload.status === "finished" ? (payload.result || "Game finished") : "Board synchronized with your opponent.");
-      })
-      .subscribe();
-    return () => { client.removeChannel(channel); };
+    const pollId = window.setInterval(refresh, 3000);
+    return () => {
+      active = false;
+      window.clearInterval(pollId);
+      if (client && channel) client.removeChannel(channel);
+    };
   }, [roomId, !!room]);
 
   const selectSquare = useCallback((square) => {
