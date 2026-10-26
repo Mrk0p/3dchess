@@ -1,0 +1,17 @@
+.multiplayer-shell .multiplayer-intro{padding-bottom:28px}
+.multiplayer-lobby{margin:0 0 18px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#171b23}
+.lobby-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.join-form{display:flex;gap:8px;flex:1;min-width:250px}
+.join-form input{min-width:0;flex:1;background:#10141b;color:#ece9e2;border:1px solid #343d49;border-radius:6px;padding:0 12px;font:12px "DM Mono",monospace;outline:none}
+.join-form input:focus{border-color:var(--accent)}
+.lobby-actions>.primary-button,.join-form>.secondary-button{padding:0 14px;min-height:40px}
+.room-meta{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.room-meta span{display:flex;flex-direction:column;gap:5px;min-width:0}
+.room-meta small{color:#818a98;font:9px "DM Mono",monospace;letter-spacing:1px}
+.room-meta strong{font:11px "DM Mono",monospace;overflow-wrap:anywhere}
+.room-meta .text-button{margin:0;color:var(--accent)}
+.multiplayer-error{margin:12px 0 0;color:#ff9c9c;font-size:12px;line-height:1.5}
+.multiplayer-message{min-height:0!important;margin-bottom:0!important;color:#a8b0bc!important}
+.multiplayer-workspace .three-canvas{min-height:330px}
+.multiplayer-shell .site-footer a{color:#aab2bf;text-decoration:none}
+@media(max-width:560px){.lobby-actions{align-items:stretch;flex-direction:column}.lobby-actions>.primary-button{min-height:42px}.join-form{min-width:0;width:100%;min-height:42px}.join-form input{width:50%}.room-meta{gap:14px}.room-meta span:first-child{width:100%}}
