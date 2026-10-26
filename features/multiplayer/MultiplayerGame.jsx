@@ -115,7 +115,7 @@ export default function MultiplayerGame() {
         const response = await fetch(`/api/multiplayer/rooms/${encodeURIComponent(roomId)}`, { cache: "no-store" });
         const data = await response.json();
         if (active && response.ok && data.room?.roomId === roomId) {
-          setRoom((current) => current?.updatedAt === data.room.updatedAt ? current : data.room);
+          setRoom((current) => !current || new Date(data.room.updatedAt) > new Date(current.updatedAt) ? data.room : current);
         }
       } catch { /* Keep the last known board while the network reconnects. */ }
     };
@@ -140,7 +140,7 @@ export default function MultiplayerGame() {
       window.clearInterval(pollId);
       if (client && channel) client.removeChannel(channel);
     };
-  }, [roomId, !!room]);
+  }, [roomId, room?.roomId]);
 
   const selectSquare = useCallback((square) => {
     if (!room || !myTurn || busy) return;
