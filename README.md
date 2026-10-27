@@ -43,10 +43,11 @@ npm start
 
 1. Create a Supabase project.
 2. Run `supabase/migrations/202610260001_online_chess.sql` in the Supabase SQL Editor.
-3. Configure these environment variables locally and in Vercel:
+3. Configure these environment variables locally in `.env.local` and in Vercel:
    - `NEXT_PUBLIC_SUPABASE_URL`: Supabase project URL
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Supabase publishable/anon key, used by the browser Realtime client
-   - `SUPABASE_SERVICE_ROLE_KEY`: Supabase service-role secret, used only by server routes; never prefix this secret with `NEXT_PUBLIC_`
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: Supabase publishable key used by the browser Realtime client
+   - `SUPABASE_SECRET_KEY`: server-only Supabase secret key used by API routes; never prefix it with `NEXT_PUBLIC_`
+   - `SUPABASE_JWKS_URL`: optional Auth JWKS URL; not currently required by multiplayer routes
 4. Deploy the Next.js app. Open **Online Play**, create a room, and share the invite link.
 5. Test using two separate browser profiles/devices.
 
