@@ -25,7 +25,7 @@ export default function ChessBoard({ position, selected, targets, orientation, o
       <div className="board-toolbar">
         <div className="player-label"><span className={`player-icon ${status.startsWith("White") ? "active" : ""}`}>♔</span><div><strong>White</strong><small>Ivory pieces</small></div></div>
         <div className="board-toolbar-center"><span className="status-dot" />{status}</div>
-        <div className="player-label"><span className="player-icon black-icon">♚</span><div><strong>Black</strong><small>Onyx pieces</small></div></div>
+        <div className="player-label"><span className={`player-icon black-icon ${status.startsWith("Black") ? "active" : ""}`}>♚</span><div><strong>Black</strong><small>Onyx pieces</small></div></div>
       </div>
       <div className="three-canvas" ref={mountRef} aria-label="Interactive 3D chessboard" />
       <div className="board-footer"><span><kbd>DRAG</kbd> ORBIT VIEW</span><span><kbd>SCROLL</kbd> ZOOM</span><span>LEGAL MOVES ONLY</span></div>
